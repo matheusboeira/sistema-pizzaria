@@ -4,7 +4,9 @@ import dotenv from 'dotenv'
 import express, { Request, Response, NextFunction } from 'express'
 import 'express-async-errors'
 import { router } from './routes'
+
 import cors from 'cors'
+import path from 'path'
 
 dotenv.config()
 
@@ -14,16 +16,16 @@ const port = process.env.PORT || 3000
 server.use(express.json())
 server.use(cors())
 server.use(router)
+server.use('/files', express.static(path.resolve(__dirname, '..', 'tmp')))
 
-server.use((err: Error, req: Request, res: Response, next: NextFunction) => {
+server.use((err: Error, _: Request, res: Response, __: NextFunction) => {
 	if (err instanceof Error) {
-		res.status(400).json({
+		return res.status(400).json({
 			status: 'error',
 			message: err.message
 		})
-		console.log(err.message)
 	}
-	res.status(500).json({
+	return res.status(500).json({
 		status: 'error',
 		message: 'Internal server error'
 	})

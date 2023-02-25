@@ -11,7 +11,7 @@ class CreateUserController {
 			password
 		})
 
-		response.json(user)
+		return response.json(user)
 	}
 }
 

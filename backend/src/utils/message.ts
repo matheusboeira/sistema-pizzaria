@@ -10,7 +10,7 @@ const log = (
 	message: string,
 	type: Type = Type.RESET,
 	messageColorized = '',
-	clear = false
+	clear = true
 ) => {
 	clear ? console.clear() : null
 	console.log(message, `${type + messageColorized}`, Type.RESET)

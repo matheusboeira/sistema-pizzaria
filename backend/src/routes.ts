@@ -1,14 +1,63 @@
 import { Router } from 'express'
+import multer from 'multer'
 
 import { AuthUserController } from './controllers/user/AuthUserController'
 import { CreateUserController } from './controllers/user/CreateUserController'
 import { DetailUserController } from './controllers/user/DetailUserController'
+import { CreateCategoryController } from './controllers/category/CreateCategoryController'
+import { ListCategoryController } from './controllers/category/ListCategoryController'
+import { CreateProductController } from './controllers/product/CreateProductController'
+
 import { isAuthenticated } from './middlewares/isAuthenticated'
 
-const router = Router()
+import uploadConfig from './config/multer'
+import { ListByCategoryController } from './controllers/product/ListByCategoryController'
+import { CreateOrderController } from './controllers/order/CreateOrderController'
+import { RemoveOrderController } from './controllers/order/RemoveOrderController'
+import { AddItemController } from './controllers/order/AddItemController'
+import { RemoveItemController } from './controllers/order/RemoveItemController'
 
+const router = Router()
+const upload = multer(uploadConfig.upload('./tmp'))
+
+/**
+ * Routes for users
+ */
 router.post('/users', new CreateUserController().handle)
 router.post('/login', new AuthUserController().handle)
 router.get('/me', isAuthenticated, new DetailUserController().handle)
+
+/**
+ * Routes for categories
+ */
+router.post('/category', isAuthenticated, new CreateCategoryController().handle)
+router.get('/categories', isAuthenticated, new ListCategoryController().handle)
+
+/**
+ * Routes for products.
+ */
+router.post(
+	'/product',
+	isAuthenticated,
+	upload.single('file'),
+	new CreateProductController().handle
+)
+router.get(
+	'/category/product',
+	isAuthenticated,
+	new ListByCategoryController().handle
+)
+
+/**
+ * Routes for orders.
+ */
+router.post('/order', isAuthenticated, new CreateOrderController().handle)
+router.delete('/order', isAuthenticated, new RemoveOrderController().handle)
+router.post('/order/add', isAuthenticated, new AddItemController().handle)
+router.delete(
+	'/order/remove',
+	isAuthenticated,
+	new RemoveItemController().handle
+)
 
 export { router }

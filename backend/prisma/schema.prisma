@@ -22,11 +22,11 @@ model User {
 }
 
 model Category {
-  id         String    @id @default(uuid())
-  name       String
-  created_at DateTime  @default(now())
-  updated_at DateTime  @default(now())
-  products   Product[]
+  id        String    @id @default(uuid())
+  name      String
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @default(now())
+  products  Product[]
 
   @@map("categories")
 }
@@ -37,37 +37,37 @@ model Product {
   description String?
   price       Float
   banner      String
-  created_at  DateTime @default(now())
-  updated_at  DateTime @default(now())
-  category    Category @relation(fields: [category_id], references: [id])
-  category_id String
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @default(now())
+  category    Category @relation(fields: [categoryId], references: [id])
+  categoryId  String
   items       Item[]
 
   @@map("products")
 }
 
 model Order {
-  id         String   @id @default(uuid())
-  table      Int
-  status     Boolean  @default(false)
-  draft      Boolean  @default(true)
-  name       String?
-  created_at DateTime @default(now())
-  updated_at DateTime @default(now())
-  items      Item[]
+  id        String   @id @default(uuid())
+  table     Int
+  status    Boolean  @default(false)
+  draft     Boolean  @default(true)
+  name      String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
+  items     Item[]
 
   @@map("orders")
 }
 
 model Item {
-  id         String   @id @default(uuid())
-  amount     Int
-  created_at DateTime @default(now())
-  updated_at DateTime @default(now())
-  order      Order    @relation(fields: [order_id], references: [id])
-  order_id   String
-  product    Product  @relation(fields: [product_id], references: [id])
-  product_id String
+  id        String   @id @default(uuid())
+  amount    Int
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now())
+  order     Order    @relation(fields: [orderId], references: [id])
+  orderId   String
+  product   Product  @relation(fields: [productId], references: [id])
+  productId String
 
   @@map("items")
 }
