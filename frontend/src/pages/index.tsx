@@ -19,7 +19,7 @@ export default function Home() {
 				<div className={styles.login}>
 					<form>
 						<Input placeholder='Digite seu e-mail' />
-						<Input placeholder='Digite sua senha' />
+						<Input placeholder='Digite sua senha' type='password' />
 						<Button>Acessar</Button>
 					</form>
 					<Link href='/signup' className={styles.text}>

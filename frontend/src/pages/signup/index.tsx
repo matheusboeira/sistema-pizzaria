@@ -12,18 +12,21 @@ export default function SignUp() {
 	return (
 		<>
 			<Head>
-				<title>SujeitoPizza - Faça seu login</title>
+				<title>SujeitoPizza - Faça seu cadastro</title>
 			</Head>
 			<div className={styles.container}>
 				<Image src={logoImg} alt='Logo Sujeito Pizzaria' />
 				<div className={styles.login}>
+					<h1>Cadastro de Conta</h1>
 					<form>
+						<Input placeholder='Digite seu nome' />
 						<Input placeholder='Digite seu e-mail' />
-						<Input placeholder='Digite sua senha' />
+						<Input placeholder='Digite sua senha' type='password' />
+						<Input placeholder='Confirme sua senha' type='password' />
 						<Button>Acessar</Button>
 					</form>
-					<Link href='/signup' className={styles.text}>
-						Não possui uma conta? <span>Cadastre-se</span>
+					<Link href='/' className={styles.text}>
+						Já possui uma conta? <span>Faça login!</span>
 					</Link>
 				</div>
 			</div>
