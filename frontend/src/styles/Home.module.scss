@@ -42,12 +42,13 @@
 		color: var(--red-700);
 	}
 
-	&:hover {
+	&:hover,
+	&:focus {
 		span {
-      text-decoration: underline;
-      text-decoration-style: solid;
-      text-underline-offset: 3px;
-      text-decoration-color: var(--white);
+			text-decoration: underline;
+			text-decoration-style: solid;
+			text-underline-offset: 3px;
+			text-decoration-color: var(--white);
 		}
 	}
 }
