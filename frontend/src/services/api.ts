@@ -1,7 +1,7 @@
 import axios, { AxiosError } from 'axios'
 import { parseCookies } from 'nookies'
 import { AuthTokenError } from './errors/AuthTokenError'
-import { signOut } from '@src/contexts/AuthContext'
+import { signOut, TOKEN_NAME } from '@src/contexts/AuthContext'
 
 export const setupAPIClient = (context = undefined) => {
 	let cookies = parseCookies(context)
@@ -9,7 +9,9 @@ export const setupAPIClient = (context = undefined) => {
 	const api = axios.create({
 		baseURL: 'http://localhost:5000',
 		headers: {
-			Authorization: `Bearer ${cookies['@sujeitopizza.token']}`
+			Authorization: `Bearer ${
+				cookies[process.env.NEXT_PUBLIC_TOKEN_NAME as string]
+			}`
 		}
 	})
 

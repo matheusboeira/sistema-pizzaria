@@ -6,10 +6,11 @@ import { Input } from '@src/components/Input'
 import styles from '@src/styles/Home.module.scss'
 
 import Logo from '@src/components/Logo'
-import { FormEvent, useState, useContext } from 'react'
 import { AuthContext } from '@src/contexts/AuthContext'
+import { FormEvent, useContext, useState } from 'react'
 
 import { toast } from 'react-toastify'
+import { onlyGuests } from '../../utils/onlyGuests';
 
 type SignUpUser = {
 	name: string
@@ -40,6 +41,11 @@ export default function SignUp() {
 			toast.error('As senhas não coincidem.')
 			return
 		}
+
+		if (Object.values(user).some((value) => value === '')) {
+			toast.warn('Por favor, preencha todos os campos.')
+			return
+		}
 		setLoading(true)
 
 		await signUp({
@@ -64,28 +70,24 @@ export default function SignUp() {
 							placeholder='Digite seu nome'
 							value={user.name}
 							onChange={(e) => handleChange('name', e.target.value)}
-							required
 						/>
 						<Input
 							placeholder='Digite seu e-mail'
 							value={user.email}
 							onChange={(e) => handleChange('email', e.target.value)}
 							type='email'
-							required
 						/>
 						<Input
 							placeholder='Digite sua senha'
 							type='password'
 							value={user.password}
 							onChange={(e) => handleChange('password', e.target.value)}
-							required
 						/>
 						<Input
 							placeholder='Confirme sua senha'
 							type='password'
 							value={user.confirmPassword}
 							onChange={(e) => handleChange('confirmPassword', e.target.value)}
-							required
 						/>
 						<Button loading={loading}>Acessar</Button>
 					</form>
@@ -97,3 +99,9 @@ export default function SignUp() {
 		</>
 	)
 }
+
+export const getServerSideProps = onlyGuests(async (context) => {
+	return {
+		props: {}
+	}
+})

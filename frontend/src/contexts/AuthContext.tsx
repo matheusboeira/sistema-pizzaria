@@ -1,9 +1,8 @@
-import { createContext, useState } from 'react'
-import { destroyCookie, setCookie } from 'nookies'
+import { createContext, useEffect, useState } from 'react'
+import { destroyCookie, setCookie, parseCookies } from 'nookies'
 import Router from 'next/router'
 
 import { api } from '@src/services/useAPI'
-
 import { toast } from 'react-toastify'
 
 type UserProps = {
@@ -35,9 +34,11 @@ type AuthProviderProps = {
 	children: React.ReactNode
 }
 
+const TOKEN_NAME = process.env.NEXT_PUBLIC_TOKEN_NAME as string
+
 const signOut = () => {
 	try {
-		destroyCookie(undefined, '@sujeitopizzaria.token')
+		destroyCookie(undefined, TOKEN_NAME)
 		Router.push('/')
 	} catch {
 		console.log('Error ao deslogar.')
@@ -50,6 +51,22 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
 	const [user, setUser] = useState<UserProps>()
 	const isAuthenticated = !!user
 
+	useEffect(() => {
+		const { [`${TOKEN_NAME}`]: token } = parseCookies()
+
+		if (token) {
+			api
+				.get('/details')
+				.then((response) => {
+					const { id, name, email } = response.data
+					setUser({ id, name, email })
+				})
+				.catch(() => {
+					signOut()
+				})
+		}
+	}, [])
+
 	const signIn = async ({ email, password }: SignInProps) => {
 		try {
 			const response = await api.post('/login', {
@@ -59,7 +76,7 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
 
 			const { id, name, token } = response.data
 
-			setCookie(undefined, '@sujeitopizzaria.token', token, {
+			setCookie(undefined, TOKEN_NAME, token, {
 				maxAge: 3600 * 24 * 30,
 				path: '/'
 			})
@@ -69,7 +86,7 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
 			toast.success('Logado com sucesso!')
 			Router.push('/dashboard')
 		} catch (err) {
-			toast.error("Email ou senha incorretos.")
+			toast.error('Email ou senha incorretos.')
 			console.log(err)
 		}
 	}
@@ -81,10 +98,10 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
 				email,
 				password
 			})
-			toast.success("Conta criada com sucesso!")
+			toast.success('Conta criada com sucesso!')
 			Router.push('/')
 		} catch (err) {
-			toast.error("Erro ao cadastrar.")
+			toast.error('Erro ao cadastrar.')
 			console.log(err)
 		}
 	}
@@ -98,4 +115,4 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
 	)
 }
 
-export { AuthContext, AuthProvider, signOut }
+export { AuthContext, AuthProvider, signOut, TOKEN_NAME }

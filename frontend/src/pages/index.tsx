@@ -8,6 +8,8 @@ import { FormEvent, useContext, useState } from 'react'
 
 import styles from '@src/styles/Home.module.scss'
 import Logo from '@src/components/Logo'
+import { toast } from 'react-toastify'
+import { onlyGuests } from '@src/utils/onlyGuests'
 
 export default function Home() {
 	const { signIn } = useContext(AuthContext)
@@ -18,6 +20,12 @@ export default function Home() {
 
 	const handleSubmit = async (e: FormEvent) => {
 		e.preventDefault()
+
+		if (email === '' || password === '') {
+			toast.warn('Por favor, preencha todos os campos.')
+			return
+		}
+
 		setLoading(true)
 		await signIn({ email, password })
 		setLoading(false)
@@ -37,14 +45,12 @@ export default function Home() {
 							value={email}
 							onChange={(e) => setEmail(e.target.value)}
 							type='email'
-							required
 						/>
 						<Input
 							placeholder='Digite sua senha'
 							type='password'
 							value={password}
 							onChange={(e) => setPassword(e.target.value)}
-							required
 						/>
 						<Button loading={loading}>Acessar</Button>
 					</form>
@@ -56,4 +62,10 @@ export default function Home() {
 		</>
 	)
 }
+
+export const getServerSideProps = onlyGuests(async (context) => {
+	return {
+		props: {}
+	}
+})
 

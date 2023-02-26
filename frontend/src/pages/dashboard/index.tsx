@@ -1,5 +1,24 @@
+import Header from '@src/components/Header'
+import Head from 'next/head'
+import { onlyAuth } from '../../utils/onlyAuth'
+
 const Dashboard = () => {
-	return <h1>Bem-vindo ao painel!</h1>
+	return (
+		<>
+			<Head>
+				<title>Painel - SujeitoPizzaria</title>
+			</Head>
+			<div>
+				<Header />
+			</div>
+		</>
+	)
 }
 
 export default Dashboard
+
+export const getServerSideProps = onlyAuth(async (context) => {
+	return {
+		props: {}
+	}
+})
