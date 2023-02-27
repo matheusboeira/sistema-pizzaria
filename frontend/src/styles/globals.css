@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 * {
 	margin: 0;
 	padding: 0;
@@ -11,7 +15,8 @@
 	--dark-900: #101025;
 	--dark-700: #1d1d2e;
 	--gray-100: #8a8a8a;
-	--green-900: #3fffa3;
+	--green-700: #3fffa3;
+	--green-900: #1cc774;
 	--red-900: #cf1d29;
 	--red-700: #fa303d;
 }
@@ -26,7 +31,7 @@ a {
 }
 
 body {
-	background: var(--dark-700);
+	/* background: var(--dark-700); */
 }
 
 body,

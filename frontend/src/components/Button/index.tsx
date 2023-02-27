@@ -1,23 +1,24 @@
 import { ButtonHTMLAttributes } from 'react'
-import styles from './Button.module.scss'
-
-import { FaSpinner } from 'react-icons/fa'
+import { PrimarySpinner } from '../Loading'
+import { ButtonStyled } from './Button.styles'
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+	variant: 'primary' | 'secondary' | 'tertiary'
 	loading?: boolean
-	children: React.ReactNode
+	icon?: JSX.Element
+	children?: React.ReactNode
+	customize?: string
 }
 
-const Button = ({ loading, children, ...rest }: ButtonProps) => {
+export const Button = ({ loading, icon, children, ...rest }: ButtonProps) => {
 	return (
-		<button className={styles.button} disabled={loading} {...rest}>
-			{loading ? (
-				<FaSpinner color='#fff' size={16} />
-			) : (
-				<a className={styles.text}>{children}</a>
-			)}
-		</button>
+		<ButtonStyled disabled={loading} {...rest}>
+			{loading ? icon : <a>{children}</a>}
+		</ButtonStyled>
 	)
 }
 
-export { Button }
+Button.defaultProps = {
+	variant: 'primary',
+	icon: <PrimarySpinner />
+}
