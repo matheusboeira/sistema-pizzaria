@@ -1,5 +1,5 @@
 import { useTheme } from 'next-themes'
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react'
 
 const ToggleTheme = () => {
 	const [mounted, setMounted] = useState(false)
@@ -9,12 +9,12 @@ const ToggleTheme = () => {
 		setMounted(true)
 	}, [])
 
-	if (!mounted) return null
-
 	return (
-		<button onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}>
-			{theme === 'dark' ? 'light' : 'dark'}
-		</button>
+		mounted && (
+			<button onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}>
+				{theme === 'dark' ? 'light' : 'dark'}
+			</button>
+		)
 	)
 }
 
