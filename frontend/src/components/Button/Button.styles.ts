@@ -1,11 +1,11 @@
 import tw from 'tailwind-styled-components'
 
-interface StyleProps {
+interface Props {
 	variant: 'primary' | 'secondary' | 'tertiary'
 	customize?: string
 }
 
-const getColors = ({ variant }: StyleProps) => {
+const getColors = ({ variant }: Props) => {
 	switch (variant) {
 		case 'primary':
 			return `
@@ -30,7 +30,7 @@ const getColors = ({ variant }: StyleProps) => {
 	}
 }
 
-export const ButtonStyled = tw.button<StyleProps>`
+export const StyledButton = tw.button<Props>`
 	rounded-lg 
 	text-sm 
 	px-5 

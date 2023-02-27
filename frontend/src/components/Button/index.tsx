@@ -1,6 +1,6 @@
 import { ButtonHTMLAttributes } from 'react'
 import { PrimarySpinner } from '../Loading'
-import { ButtonStyled } from './Button.styles'
+import { StyledButton } from './Button.styles'
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 	variant: 'primary' | 'secondary' | 'tertiary'
@@ -12,9 +12,9 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 
 export const Button = ({ loading, icon, children, ...rest }: ButtonProps) => {
 	return (
-		<ButtonStyled disabled={loading} {...rest}>
+		<StyledButton disabled={loading} {...rest}>
 			{loading ? icon : <a>{children}</a>}
-		</ButtonStyled>
+		</StyledButton>
 	)
 }
 
