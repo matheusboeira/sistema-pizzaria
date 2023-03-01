@@ -31,13 +31,13 @@ export const ToggleSpan = tw.span<ToggleSpanProps>`
   ${(props) => (props.position === 'left' ? 'right-1' : 'right-8')}
 `
 
-export const ToggleCircle = tw.span`
+export const ToggleCircle = tw.span<ToggleSpanProps>`
   w-7
   h-7 
-  right-7 
   absolute 
   rounded-full 
   transform 
   transition-transform 
   bg-gray-200
+  ${(props) => (props.position === 'right' ? 'right-7' : 'left-7')}
 `

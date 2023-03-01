@@ -3,8 +3,8 @@ import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 
 import { AuthProvider } from '@src/contexts/AuthContext'
-import type { AppProps } from 'next/app'
 import { ThemeProvider } from 'next-themes'
+import type { AppProps } from 'next/app'
 
 export default function App({ Component, pageProps }: AppProps) {
 	return (

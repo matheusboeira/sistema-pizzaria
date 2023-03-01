@@ -1,14 +1,10 @@
 import styles from './Loading.module.scss'
 
-import { SVGAttributes } from 'react'
 import { CgSpinnerTwo } from 'react-icons/cg'
 import { FaSpinner } from 'react-icons/fa'
+import { IconBaseProps, IconType } from 'react-icons/lib'
 
-interface LoadingProps extends SVGAttributes<SVGElement> {
-	size?: number
-}
-
-export const PrimarySpinner = (props: LoadingProps) => (
+export const PrimarySpinner = (props: IconBaseProps) => (
 	<FaSpinner
 		className={styles.loading}
 		color={props.color ?? '#fff'}
@@ -16,7 +12,7 @@ export const PrimarySpinner = (props: LoadingProps) => (
 	/>
 )
 
-export const SecondarySpinner = (props: LoadingProps) => (
+export const SecondarySpinner = (props: IconBaseProps) => (
 	<CgSpinnerTwo
 		className={styles.loading}
 		color={props.color ?? '#fff'}

@@ -1,5 +1,3 @@
-import styles from './ToggleTheme.module.scss'
-
 import { useTheme } from 'next-themes'
 import { useEffect, useState } from 'react'
 import { FaMoon, FaSun } from 'react-icons/fa'
@@ -20,18 +18,14 @@ const ToggleTheme = () => {
 
 	if (!mounted) return null
 
-	const toggleTheme = () => {
-		return theme === 'dark' ? 'light' : 'dark'
-	}
-
 	const handleClick = () => {
-		setTheme(toggleTheme())
+		setTheme(theme === 'dark' ? 'light' : 'dark')
 	}
 
 	return (
 		<>
 			<ToggleLabel>
-				<ToggleInput id={styles.input} type='checkbox' onClick={handleClick} />
+				<ToggleInput type='checkbox' onClick={handleClick} />
 				<ToggleSpan position={theme === 'dark' ? 'left' : 'right'}>
 					{theme === 'dark' ? (
 						<FaSun color='#f29a12' />
@@ -39,7 +33,7 @@ const ToggleTheme = () => {
 						<FaMoon color='#efc60b' />
 					)}
 				</ToggleSpan>
-				<ToggleCircle />
+				<ToggleCircle position={theme === 'dark' ? 'right' : 'left'} />
 			</ToggleLabel>
 		</>
 	)
