@@ -20,14 +20,18 @@ const ToggleTheme = () => {
 
 	if (!mounted) return null
 
+	const toggleTheme = () => {
+		return theme === 'dark' ? 'light' : 'dark'
+	}
+
 	const handleClick = () => {
-		setTheme(theme === 'dark' ? 'light' : 'dark')
+		setTheme(toggleTheme())
 	}
 
 	return (
 		<>
 			<ToggleLabel>
-				<ToggleInput onClick={handleClick} id={styles.input} type='checkbox' />
+				<ToggleInput id={styles.input} type='checkbox' onClick={handleClick} />
 				<ToggleSpan position={theme === 'dark' ? 'left' : 'right'}>
 					{theme === 'dark' ? (
 						<FaSun color='#f29a12' />

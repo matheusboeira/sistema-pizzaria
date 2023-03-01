@@ -19,8 +19,8 @@ export const ToggleInput = tw.input`
   w-14 h-7 
   rounded-full 
   focus:outline-none 
-  focus:ring-2 
-  focus:ring-offset-2 
+  focus:ring-2
+  focus:ring-offset-2
   focus:ring-offset-black 
   focus:ring-blue-500 
   bg-[#303030]

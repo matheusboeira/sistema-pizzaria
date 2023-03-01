@@ -9,7 +9,7 @@ import { ThemeProvider } from 'next-themes'
 export default function App({ Component, pageProps }: AppProps) {
 	return (
 		<AuthProvider>
-			<ThemeProvider defaultTheme='dark' attribute='class'>
+			<ThemeProvider attribute='class'>
 				<Component {...pageProps} />
 			</ThemeProvider>
 			<ToastContainer autoClose={3000} theme={'dark'} newestOnTop />
