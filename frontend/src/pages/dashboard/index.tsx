@@ -1,6 +1,6 @@
 import Header from '@src/components/Header'
 import Head from 'next/head'
-import { onlyAuth } from '../../utils/onlyAuth'
+import { AuthGuard } from '../../utils/AuthGuard'
 
 const Dashboard = () => {
 	return (
@@ -17,7 +17,7 @@ const Dashboard = () => {
 
 export default Dashboard
 
-export const getServerSideProps = onlyAuth(async (context) => {
+export const getServerSideProps = AuthGuard(async (context) => {
 	return {
 		props: {}
 	}

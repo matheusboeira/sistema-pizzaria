@@ -9,7 +9,7 @@ import { Input } from '@src/components/Input'
 
 import { api } from '@src/services/api'
 import { toast } from 'react-toastify'
-import { onlyAuth } from '@src/utils/onlyAuth'
+import { AuthGuard } from '@src/utils/AuthGuard'
 
 type CategoryProps = {
 	id?: string
@@ -59,7 +59,7 @@ const Category = () => {
 						value={name}
 						onChange={(e) => setName(e.target.value)}
 					/>
-					<Button className={styles.button}>Cadastrar</Button>
+					<Button variant='secondary'>Cadastrar</Button>
 				</form>
 				<div className={styles.list}>
 					<h2 className='text-2xl mb-3'>Categorias Cadastradas</h2>
@@ -99,7 +99,7 @@ const Category = () => {
 
 export default Category
 
-export const getServerSideProps = onlyAuth(async (context) => {
+export const getServerSideProps = AuthGuard(async (context) => {
 	return {
 		props: {}
 	}

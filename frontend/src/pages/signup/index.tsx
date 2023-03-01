@@ -1,7 +1,6 @@
 import Head from 'next/head'
 import Link from 'next/link'
 
-import { Button } from '@src/components/Button'
 import { Input } from '@src/components/Input'
 import styles from '@src/styles/Home.module.scss'
 
@@ -10,7 +9,8 @@ import { AuthContext } from '@src/contexts/AuthContext'
 import { FormEvent, useContext, useState } from 'react'
 
 import { toast } from 'react-toastify'
-import { onlyGuests } from '../../utils/onlyGuests';
+import { GuestGuard } from '../../utils/GuestGuard'
+import { LoadingButton } from '@src/components/Button'
 
 type SignUpUser = {
 	name: string
@@ -89,7 +89,9 @@ export default function SignUp() {
 							value={user.confirmPassword}
 							onChange={(e) => handleChange('confirmPassword', e.target.value)}
 						/>
-						<Button loading={loading}>Acessar</Button>
+						<LoadingButton loading={loading} type='submit'>
+							Acessar
+						</LoadingButton>
 					</form>
 					<Link href='/' className={styles.text}>
 						Já possui uma conta? <span>Faça login!</span>
@@ -100,7 +102,7 @@ export default function SignUp() {
 	)
 }
 
-export const getServerSideProps = onlyGuests(async (context) => {
+export const getServerSideProps = GuestGuard(async (context) => {
 	return {
 		props: {}
 	}

@@ -1,6 +1,7 @@
+import Router from 'next/router'
+
 import { createContext, useEffect, useState } from 'react'
 import { destroyCookie, setCookie, parseCookies } from 'nookies'
-import Router from 'next/router'
 
 import { api } from '@src/services/api'
 import { toast } from 'react-toastify'

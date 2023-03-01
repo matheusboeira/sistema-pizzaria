@@ -7,7 +7,7 @@ import {
 } from 'next'
 import { parseCookies, destroyCookie } from 'nookies'
 
-export function onlyAuth<P extends { [key: string]: any }>(
+export function AuthGuard<P extends { [key: string]: any }>(
 	fn: GetServerSideProps<P>
 ) {
 	return async (

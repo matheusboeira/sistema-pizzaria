@@ -1,24 +1,36 @@
 import { ButtonHTMLAttributes } from 'react'
 import { PrimarySpinner } from '../Loading'
-import { StyledButton } from './Button.styles'
+import { StyledButton } from './Button.styled'
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-	variant: 'primary' | 'secondary' | 'tertiary'
+	variant?: 'primary' | 'secondary' | 'tertiary'
 	loading?: boolean
 	icon?: JSX.Element
 	children?: React.ReactNode
 	customize?: string
 }
 
-export const Button = ({ loading, icon, children, ...rest }: ButtonProps) => {
+export const Button = ({
+	variant = 'primary',
+	children,
+	...rest
+}: ButtonProps) => {
 	return (
-		<StyledButton disabled={loading} {...rest}>
-			{loading ? icon : <a>{children}</a>}
+		<StyledButton variant={variant} {...rest}>
+			{children}
 		</StyledButton>
 	)
 }
 
-Button.defaultProps = {
-	variant: 'primary',
-	icon: <PrimarySpinner />
+export const LoadingButton = ({
+	icon = <PrimarySpinner />,
+	loading,
+	children,
+	...rest
+}: ButtonProps) => {
+	return (
+		<Button {...rest}>
+			{loading ? icon : children}
+		</Button>
+	)
 }

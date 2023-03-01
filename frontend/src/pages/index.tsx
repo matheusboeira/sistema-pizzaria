@@ -1,17 +1,17 @@
 import styles from '@src/styles/Home.module.scss'
 
-import Head from 'next/head'
 import Link from 'next/link'
 
 import { FormEvent, useContext, useState } from 'react'
 
-import { Button } from '@src/components/Button'
+import { LoadingButton } from '@src/components/Button'
 import { Input } from '@src/components/Input'
 import Logo from '@src/components/Logo'
-import { AuthContext } from '@src/contexts/AuthContext'
-import { onlyGuests } from '@src/utils/onlyGuests'
-import { toast } from 'react-toastify'
 import Page from '@src/components/Page'
+import ToggleTheme from '@src/components/ToggleTheme'
+import { AuthContext } from '@src/contexts/AuthContext'
+import { GuestGuard } from '@src/utils/GuestGuard'
+import { toast } from 'react-toastify'
 
 export default function Home() {
 	const { signIn } = useContext(AuthContext)
@@ -36,6 +36,9 @@ export default function Home() {
 	return (
 		<>
 			<Page title='Faça seu login'>
+				<div className={styles.toggleTheme}>
+					<ToggleTheme />
+				</div>
 				<div className={styles.container}>
 					<Logo />
 					<div className={styles.login}>
@@ -53,9 +56,9 @@ export default function Home() {
 								value={password}
 								onChange={(e) => setPassword(e.target.value)}
 							/>
-							<Button loading={loading} type='submit'>
+							<LoadingButton loading={loading} type='submit'>
 								Acessar
-							</Button>
+							</LoadingButton>
 						</form>
 						<Link href='/signup' className={styles.text}>
 							Não possui uma conta? <span>Cadastre-se</span>
@@ -67,7 +70,7 @@ export default function Home() {
 	)
 }
 
-export const getServerSideProps = onlyGuests(async (context) => {
+export const getServerSideProps = GuestGuard(async (context) => {
 	return {
 		props: {}
 	}

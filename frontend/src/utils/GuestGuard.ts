@@ -6,7 +6,7 @@ import {
 import { parseCookies } from 'nookies'
 import { TOKEN_NAME } from '@src/contexts/AuthContext';
 
-export function onlyGuests<P extends { [key: string]: any }>(
+export function GuestGuard<P extends { [key: string]: any }>(
 	fn: GetServerSideProps<P>
 ) {
 	return async (
