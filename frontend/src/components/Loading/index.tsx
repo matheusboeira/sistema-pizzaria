@@ -2,7 +2,7 @@ import styles from './Loading.module.scss'
 
 import { CgSpinnerTwo } from 'react-icons/cg'
 import { FaSpinner } from 'react-icons/fa'
-import { IconBaseProps, IconType } from 'react-icons/lib'
+import { IconBaseProps } from 'react-icons/lib'
 
 export const PrimarySpinner = (props: IconBaseProps) => (
 	<FaSpinner

@@ -10,24 +10,20 @@ import { Input } from '@src/components/Input'
 import { api } from '@src/services/api'
 import { toast } from 'react-toastify'
 import { AuthGuard } from '@src/utils/AuthGuard'
+import { setupAPI } from '../../services/api';
 
-type CategoryProps = {
-	id?: string
-	name?: string
+interface ItemProps {
+	id: string
+	name: string
 }
 
-const Category = () => {
+interface CategoryProps {
+	categories: ItemProps[]
+}
+
+const Category = ({ categories }: CategoryProps) => {
 	const [name, setName] = useState('')
-	const [category, setCategory] = useState<CategoryProps[]>([])
-
-	useEffect(() => {
-		const fetchCategories = async () => {
-			let categories = await api.get('categories')
-			setCategory(categories.data)
-		}
-
-		fetchCategories().catch(console.error)
-	}, [category])
+	const [category, setCategory] = useState(categories || [])
 
 	const handleSubmit = async (e: FormEvent) => {
 		e.preventDefault()
@@ -37,7 +33,8 @@ const Category = () => {
 			return
 		}
 
-		await api.post('/category', { name })
+		await api.post('/category', { name: name })
+
 		toast.success('Categoria cadastrada com sucesso!', {
 			position: 'bottom-right'
 		})
@@ -100,7 +97,12 @@ const Category = () => {
 export default Category
 
 export const getServerSideProps = AuthGuard(async (context) => {
+	const api = setupAPI(context)
+	const response = await api.get('categories')
+
 	return {
-		props: {}
+		props: {
+			categories: response.data
+		}
 	}
 })

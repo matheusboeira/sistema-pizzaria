@@ -1,9 +1,9 @@
+import { signOut } from '@src/contexts/AuthContext'
 import axios, { AxiosError } from 'axios'
 import { parseCookies } from 'nookies'
 import { AuthTokenError } from './errors/AuthTokenError'
-import { signOut } from '@src/contexts/AuthContext'
 
-const setupAPI = (context = undefined) => {
+export const setupAPI = (context: any = undefined) => {
 	let cookies = parseCookies(context)
 
 	const api = axios.create({

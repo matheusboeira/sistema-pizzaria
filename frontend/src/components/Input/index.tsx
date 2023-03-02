@@ -5,7 +5,9 @@ interface InputProps extends InputHTMLAttributes<HTMLInputElement> {}
 interface TextAreaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {}
 
 export const Input = ({ className, ...rest }: InputProps) => {
-	return <input className={[styles.input, className].join(' ')} {...rest} />
+	return (
+		<input className={[styles.input, className, 'h-10'].join(' ')} {...rest} />
+	)
 }
 
 export const TextArea = ({ className, ...rest }: TextAreaProps) => {

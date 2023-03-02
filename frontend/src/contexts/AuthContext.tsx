@@ -41,8 +41,8 @@ const signOut = () => {
 	try {
 		destroyCookie(undefined, TOKEN_NAME)
 		Router.push('/')
-	} catch {
-		console.log('Error ao deslogar.')
+	} catch(err) {
+		console.log(err)
 	}
 }
 
