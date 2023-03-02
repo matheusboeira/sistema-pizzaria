@@ -18,19 +18,21 @@ server.use(cors())
 server.use(router)
 server.use('/files', express.static(path.resolve(__dirname, '..', 'tmp')))
 
-server.use((err: Error, _: Request, res: Response, __: NextFunction) => {
-	if (err instanceof Error) {
-		return res.status(400).json({
+server.use(
+	(err: Error, _request: Request, res: Response, _next: NextFunction) => {
+		if (err instanceof Error) {
+			return res.status(400).json({
+				status: 'error',
+				message: err.message
+			})
+		}
+		return res.status(500).json({
 			status: 'error',
-			message: err.message
+			message: 'Internal server error'
 		})
 	}
-	return res.status(500).json({
-		status: 'error',
-		message: 'Internal server error'
-	})
-})
+)
 
 server.listen(port, () => {
-	log(`\n🚀 Server is listening at`, Type.SUCCESS, `http://localhost:${port}`)
+	log(`\n🚀 Server started at`, Type.SUCCESS, `http://localhost:${port}`)
 })

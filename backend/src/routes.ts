@@ -27,9 +27,9 @@ const upload = multer(uploadConfig.upload('./tmp'))
 /**
  * Routes for users
  */
-router.post('/users', new CreateUserController().handle)
+router.post('/signup', new CreateUserController().handle)
 router.post('/login', new AuthUserController().handle)
-router.get('/me', isAuthenticated, new DetailUserController().handle)
+router.get('/details', isAuthenticated, new DetailUserController().handle)
 
 /**
  * Routes for categories
