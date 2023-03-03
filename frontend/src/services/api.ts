@@ -7,7 +7,7 @@ export const setupAPI = (context: any = undefined) => {
 	let cookies = parseCookies(context)
 
 	const api = axios.create({
-		baseURL: 'http://localhost:5000',
+		baseURL: process.env.NEXT_PUBLIC_BASEURL_API,
 		headers: {
 			Authorization: `Bearer ${
 				cookies[process.env.NEXT_PUBLIC_TOKEN_NAME as string]
