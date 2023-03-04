@@ -28,9 +28,5 @@ export const LoadingButton = ({
 	children,
 	...rest
 }: ButtonProps) => {
-	return (
-		<Button {...rest}>
-			{loading ? icon : children}
-		</Button>
-	)
+	return <Button {...rest}>{loading ? icon : children}</Button>
 }
