@@ -1,6 +1,5 @@
 import Head from 'next/head'
 import { ReactNode } from 'react'
-import Header from './Header'
 
 interface PageProps {
 	title: string
