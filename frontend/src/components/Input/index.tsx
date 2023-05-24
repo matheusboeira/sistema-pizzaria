@@ -1,20 +1,20 @@
-import { InputHTMLAttributes, TextareaHTMLAttributes } from 'react'
+import React, { InputHTMLAttributes, TextareaHTMLAttributes } from 'react'
 import styles from './Input.module.scss'
+import { FieldValues, UseFormRegister } from 'react-hook-form'
 
-interface InputProps extends InputHTMLAttributes<HTMLInputElement> {}
-interface TextAreaProps extends TextareaHTMLAttributes<HTMLTextAreaElement> {}
-
-export const Input = ({ className, ...rest }: InputProps) => {
-	return (
-		<input className={[styles.input, className, 'h-10'].join(' ')} {...rest} />
-	)
+interface InputProps {
+  register?: UseFormRegister<FieldValues>
 }
 
-export const TextArea = ({ className, ...rest }: TextAreaProps) => {
-	return (
-		<textarea
-			className={[styles.input, className].join(' ')}
-			{...rest}
-		></textarea>
-	)
-}
+export const Input = React.forwardRef<
+  InputProps,
+  InputHTMLAttributes<HTMLInputElement>
+>(({ className, ...props }, ref: React.ForwardedRef<any>) => {
+  return (
+    <input
+      ref={ref}
+      className={[styles.input, className].join(' ')}
+      {...props}
+    />
+  )
+})

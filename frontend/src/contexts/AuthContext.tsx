@@ -42,7 +42,7 @@ const signOut = () => {
 		destroyCookie(undefined, TOKEN_NAME)
 		Router.push('/')
 	} catch(err) {
-		console.log(err)
+		toast.error('Erro ao deslogar.')
 	}
 }
 
@@ -88,7 +88,6 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
 			Router.push('/dashboard')
 		} catch (err) {
 			toast.error('Email ou senha incorretos.')
-			console.log(err)
 		}
 	}
 
@@ -103,7 +102,6 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
 			Router.push('/')
 		} catch (err) {
 			toast.error('Erro ao cadastrar.')
-			console.log(err)
 		}
 	}
 

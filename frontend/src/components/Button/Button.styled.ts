@@ -3,6 +3,7 @@ import tw from 'tailwind-styled-components'
 interface Props {
 	variant: 'primary' | 'secondary' | 'tertiary'
 	customize?: string
+	disabled?: boolean
 }
 
 const getColors = ({ variant }: Props) => {
@@ -41,4 +42,5 @@ export const StyledButton = tw.button<Props>`
 	focus:ring-2
 	focus:outline-none
 	${(props) => props.customize ?? getColors(props)}
+	${({ disabled }) => (disabled ? 'opacity-50 cursor-not-allowed' : '')}
 `

@@ -102,7 +102,7 @@ export default function SignUp() {
 	)
 }
 
-export const getServerSideProps = GuestGuard(async (context) => {
+export const getServerSideProps = GuestGuard(async () => {
 	return {
 		props: {}
 	}

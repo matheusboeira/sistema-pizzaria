@@ -1,78 +1,34 @@
-import styles from '@src/styles/Home.module.scss'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useForm } from 'react-hook-form'
+import { z } from 'zod'
 
-import Link from 'next/link'
+import LoginPage from '@src/pages/signin/form'
 
-import { FormEvent, useContext, useState } from 'react'
-
-import { LoadingButton } from '@src/components/Button'
-import { Input } from '@src/components/Input'
-import Logo from '@src/components/Logo'
-import Page from '@src/components/Page'
-import ToggleTheme from '@src/components/ToggleTheme'
-import { AuthContext } from '@src/contexts/AuthContext'
-import { GuestGuard } from '@src/utils/GuestGuard'
-import { toast } from 'react-toastify'
-
-export default function Home() {
-	const { signIn } = useContext(AuthContext)
-
-	const [email, setEmail] = useState('')
-	const [password, setPassword] = useState('')
-	const [loading, setLoading] = useState(false)
-
-	const handleSubmit = async (e: FormEvent) => {
-		e.preventDefault()
-
-		if (email === '' || password === '') {
-			toast.warn('Por favor, preencha todos os campos.')
-			return
-		}
-
-		setLoading(true)
-		await signIn({ email, password })
-		setLoading(false)
-	}
-
-	return (
-		<>
-			<Page title='Faça seu login'>
-				<div className={styles.toggleTheme}>
-					<ToggleTheme />
-				</div>
-				<div className={styles.container}>
-					<Logo />
-					<div className={styles.login}>
-						<form onSubmit={handleSubmit}>
-							<Input
-								placeholder='Digite seu e-mail'
-								value={email}
-								onChange={(e) => setEmail(e.target.value)}
-								type='email'
-							/>
-							<Input
-								id='password'
-								placeholder='Digite sua senha'
-								type='password'
-								value={password}
-								onChange={(e) => setPassword(e.target.value)}
-							/>
-							<LoadingButton loading={loading} type='submit'>
-								Acessar
-							</LoadingButton>
-						</form>
-						<Link href='/signup' className={styles.text}>
-							Não possui uma conta? <span>Cadastre-se</span>
-						</Link>
-					</div>
-				</div>
-			</Page>
-		</>
-	)
-}
-
-export const getServerSideProps = GuestGuard(async (context) => {
-	return {
-		props: {}
-	}
+const schema = z.object({
+  email: z.string().email('E-mail inválido.').max(255),
+  password: z
+    .string()
+    .min(3, 'A senha deve conter pelo menos 8 caracteres.')
+    .max(20, 'A senha deve ser menor que 20 caracteres.'),
 })
 
+export type FormSchema = z.infer<typeof schema>
+
+export const Login = () => {
+  const props = useForm<FormSchema>({
+    mode: 'all',
+    resolver: zodResolver(schema),
+    defaultValues: {
+      email: '',
+      password: '',
+    },
+  })
+
+  return (
+    <>
+      <LoginPage {...props} />
+    </>
+  )
+}
+
+export default Login
