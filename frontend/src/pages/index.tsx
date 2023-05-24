@@ -8,20 +8,23 @@ const schema = z.object({
   email: z.string().email('E-mail inválido.').max(255),
   password: z
     .string()
-    .min(3, 'A senha deve conter pelo menos 8 caracteres.')
-    .max(20, 'A senha deve ser menor que 20 caracteres.'),
+    .min(3, 'A senha deve conter pelo menos 3 caracteres.')
+    .max(64, 'A senha deve ser menor que 64 caracteres.'),
 })
 
 export type FormSchema = z.infer<typeof schema>
+
+const defaultValues: FormSchema = {
+  email: '',
+  password: '',
+}
 
 export const Login = () => {
   const props = useForm<FormSchema>({
     mode: 'all',
     resolver: zodResolver(schema),
-    defaultValues: {
-      email: '',
-      password: '',
-    },
+    defaultValues: defaultValues,
+    shouldFocusError: true,
   })
 
   return (

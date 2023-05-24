@@ -6,7 +6,7 @@ import { FiUpload } from 'react-icons/fi'
 
 import { Button } from '@src/components/Button'
 import Header from '@src/components/Header'
-import { Input, TextArea } from '@src/components/Input'
+import { Input } from '@src/components/Input'
 import Page from '@src/components/Page'
 
 import { api, setupAPI } from '@src/services/api'
@@ -138,12 +138,11 @@ const Product = ({ categoryList }: CategoryProps) => {
 							onChange={(e) => handleChange('price', e.target.value)}
 							placeholder='Preço do produto'
 						/>
-						<TextArea
+						<Input
 							value={product.description}
 							onChange={(e) => handleChange('description', e.target.value)}
 							className='mt-4'
 							placeholder='Descreva seu produto...'
-							rows={6}
 						/>
 						<Button type='submit' variant='secondary'>
 							Cadastrar

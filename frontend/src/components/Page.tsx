@@ -2,23 +2,19 @@ import Head from 'next/head'
 import { ReactNode } from 'react'
 
 interface PageProps {
-	title: string
-	meta?: ReactNode
-	children: ReactNode
+  title: string
+  children: ReactNode
 }
 
-const Page = ({ title, meta, children }: PageProps) => {
-	return (
-		<>
-			<Head>
-				<title>{`${title} | SujeitoPizzaria`}</title>
-				{meta}
-			</Head>
-			<div>
-				{children}
-			</div>
-		</>
-	)
+const Page = ({ title, children }: PageProps) => {
+  return (
+    <>
+      <Head>
+        <title>{`${title} | SujeitoPizzaria`}</title>
+      </Head>
+      <div>{children}</div>
+    </>
+  )
 }
 
 export default Page

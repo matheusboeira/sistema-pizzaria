@@ -1,7 +1,7 @@
 import Logo from '@src/components/Logo'
 import Page from '@src/components/Page'
 import ToggleTheme from '@src/components/ToggleTheme'
-import { FieldValues, SubmitHandler, UseFormReturn } from 'react-hook-form'
+import { UseFormReturn } from 'react-hook-form'
 
 import { LoadingButton } from '@src/components/Button'
 import { Input } from '@src/components/Input'
@@ -23,12 +23,9 @@ const LoginPage = (props: UseFormReturn<FormSchema>) => {
     formState: { errors },
   } = props
 
-  const onSubmit: SubmitHandler<FieldValues> = async (data) => {
-    console.warn("PARTE 1")
-    console.table(data)
-
+  const onSubmit = async (data: FormSchema) => {
     setLoading(true)
-    await signIn({ email: data.email, password: data.password })
+    await signIn(data)
     setLoading(false)
   }
 
