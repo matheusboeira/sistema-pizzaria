@@ -71,46 +71,37 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
 
   const signIn = async ({ email, password }: SignInProps) => {
     try {
-      Swal.fire({
-        icon: 'info',
-        title: 'Aguarde',
-        html: 'Confirmando os dados...',
-        showConfirmButton: false,
-        didOpen: () => {
-          Swal.showLoading()
-        },
-      })
-
       const response = await api.post('/login', {
         email,
-        password,
+        password
       })
 
       const { id, name, token } = response.data
 
       setCookie(undefined, TOKEN_NAME, token, {
         maxAge: 3600 * 24 * 30,
-        path: '/',
+        path: '/'
       })
       setUser({ id, name, email })
       api.defaults.headers['Authorization'] = `Bearer ${token}`
 
       Swal.fire({
         icon: 'success',
-        toast: true,
-        position: 'top-end',
+        title: 'Sucesso',
         html: 'Login efetuado com sucesso.',
         showConfirmButton: false,
-        timer: 1500,
-        timerProgressBar: true,
+        timer: 1000,
+        timerProgressBar: true
       })
 
       Router.push('/dashboard')
-    } catch (err) {
+    } catch (err: any) {
       Swal.fire({
         icon: 'error',
         title: 'Erro',
-        html: 'E-mail ou senha incorretos.',
+        timer: 3000,
+        timerProgressBar: true,
+        html: err.response.data.message ?? 'Unknown error'
       })
     }
   }
@@ -120,7 +111,7 @@ const AuthProvider = ({ children }: AuthProviderProps) => {
       await api.post('/signup', {
         name,
         email,
-        password,
+        password
       })
       toast.success('Conta criada com sucesso!')
       Router.push('/')

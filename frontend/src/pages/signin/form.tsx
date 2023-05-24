@@ -20,7 +20,7 @@ const LoginPage = (props: UseFormReturn<FormSchema>) => {
     register,
     formState,
     handleSubmit,
-    formState: { errors },
+    formState: { errors }
   } = props
 
   const onSubmit = async (data: FormSchema) => {

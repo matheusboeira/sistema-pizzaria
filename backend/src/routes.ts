@@ -1,25 +1,25 @@
 import { Router } from 'express'
 import multer from 'multer'
 
-import { AuthUserController } from './controllers/user/AuthUserController'
-import { CreateUserController } from './controllers/user/CreateUserController'
-import { DetailUserController } from './controllers/user/DetailUserController'
 import { CreateCategoryController } from './controllers/category/CreateCategoryController'
 import { ListCategoryController } from './controllers/category/ListCategoryController'
 import { CreateProductController } from './controllers/product/CreateProductController'
+import { AuthUserController } from './controllers/user/AuthUserController'
+import { CreateUserController } from './controllers/user/CreateUserController'
+import { DetailUserController } from './controllers/user/DetailUserController'
 
 import { isAuthenticated } from './middlewares/isAuthenticated'
 
 import uploadConfig from './config/multer'
-import { ListByCategoryController } from './controllers/product/ListByCategoryController'
-import { CreateOrderController } from './controllers/order/CreateOrderController'
-import { RemoveOrderController } from './controllers/order/RemoveOrderController'
 import { AddItemController } from './controllers/order/AddItemController'
-import { RemoveItemController } from './controllers/order/RemoveItemController'
-import { SendOrderController } from './controllers/order/SendOrderController'
-import { ListOrdersController } from './controllers/order/ListOrdersController'
+import { CreateOrderController } from './controllers/order/CreateOrderController'
 import { DetailOrderController } from './controllers/order/DetailOrderController'
 import { FinishOrderController } from './controllers/order/FinishOrderService'
+import { ListOrdersController } from './controllers/order/ListOrdersController'
+import { RemoveItemController } from './controllers/order/RemoveItemController'
+import { RemoveOrderController } from './controllers/order/RemoveOrderController'
+import { SendOrderController } from './controllers/order/SendOrderController'
+import { ListByCategoryController } from './controllers/product/ListByCategoryController'
 
 const router = Router()
 const upload = multer(uploadConfig.upload('./tmp'))

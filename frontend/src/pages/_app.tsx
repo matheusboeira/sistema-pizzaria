@@ -6,14 +6,15 @@ import { AuthProvider } from '@src/contexts/AuthContext'
 import { ThemeProvider } from 'next-themes'
 import type { AppProps } from 'next/app'
 
-export default function App({ Component, pageProps }: AppProps) {
-	return (
-		<AuthProvider>
-			<ThemeProvider attribute='class'>
-				<Component {...pageProps} />
-			</ThemeProvider>
-			<ToastContainer autoClose={3000} theme={'dark'} newestOnTop />
-		</AuthProvider>
-	)
+const App = ({ Component, pageProps }: AppProps) => {
+  return (
+    <AuthProvider>
+      <ThemeProvider attribute="class">
+        <Component {...pageProps} />
+      </ThemeProvider>
+      <ToastContainer autoClose={3000} theme={'dark'} newestOnTop />
+    </AuthProvider>
+  )
 }
 
+export default App

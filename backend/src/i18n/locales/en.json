@@ -1,0 +1,7 @@
+{
+  "user": {
+    "invalid-email": "Invalid e-mail format",
+    "email-or-password-incorrect": "E-mail or password incorrect",
+    "user-does-not-exists": "User does not exists"
+  }
+}

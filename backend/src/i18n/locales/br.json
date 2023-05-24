@@ -1,0 +1,7 @@
+{
+  "user": {
+    "invalid-email": "Formato inválido de e-mail",
+    "email-or-password-incorrect": "E-mail ou senha incorretos",
+    "user-does-not-exists": "Usuário não existe"
+  }
+}
