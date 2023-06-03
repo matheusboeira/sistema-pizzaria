@@ -1,14 +1,13 @@
-import { ButtonHTMLAttributes } from 'react'
+import { ComponentProps } from 'react'
 import { PrimarySpinner } from '../Loading'
 import { StyledButton } from './Button.styled'
 
-interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+interface ButtonProps extends Pick<ComponentProps<'button'>, 'disabled'> {
   variant?: 'primary' | 'secondary' | 'tertiary'
   loading?: boolean
   icon?: JSX.Element
   children?: React.ReactNode
   customize?: string
-  disabled?: boolean
 }
 
 export const Button = ({ variant = 'primary', children, disabled, ...rest }: ButtonProps) => {
