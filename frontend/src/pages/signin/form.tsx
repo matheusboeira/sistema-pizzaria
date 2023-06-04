@@ -11,6 +11,7 @@ import Link from 'next/link'
 import { useContext, useState } from 'react'
 
 import { FormSchema } from '@src/pages/index'
+import Header from '@src/components/Header'
 
 const LoginPage = (props: UseFormReturn<FormSchema>) => {
   const { signIn } = useContext(AuthContext)
@@ -63,7 +64,12 @@ const LoginPage = (props: UseFormReturn<FormSchema>) => {
                 </span>
               )}
               <br />
-              <LoadingButton disabled={loading} loading={loading} type="submit">
+              <LoadingButton
+                icon={<Header />}
+                disabled={loading}
+                loading={loading}
+                type="submit"
+              >
                 Acessar
               </LoadingButton>
             </form>

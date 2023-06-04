@@ -2,15 +2,25 @@ import { ComponentProps } from 'react'
 import { PrimarySpinner } from '../Loading'
 import { StyledButton } from './Button.styled'
 
-interface ButtonProps extends Pick<ComponentProps<'button'>, 'disabled'> {
+type SubsetButtonProps = Pick<
+  ComponentProps<'button'>,
+  'type' | 'disabled' | 'onClick'
+>
+
+interface ButtonProps extends SubsetButtonProps {
   variant?: 'primary' | 'secondary' | 'tertiary'
   loading?: boolean
-  icon?: JSX.Element
+  icon?: React.ReactNode
   children?: React.ReactNode
   customize?: string
 }
 
-export const Button = ({ variant = 'primary', children, disabled, ...rest }: ButtonProps) => {
+export const Button = ({
+  variant = 'primary',
+  children,
+  disabled,
+  ...rest
+}: ButtonProps) => {
   return (
     <StyledButton disabled={disabled} variant={variant} {...rest}>
       {children}
